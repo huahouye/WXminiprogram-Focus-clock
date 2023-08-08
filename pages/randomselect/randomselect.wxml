@@ -1,0 +1,38 @@
+<view class="randomselect_container">
+  <view class="header">
+    <!-- <image class="plus" src="../../image/plus.png"/> -->
+    <input class="new-randomselect" value="{{ input }}" placeholder="添加选项"  bindinput="inputChangeHandle"  bindconfirm="addItemHandle" confirm-type="done"/>
+    <image class="plus" wx:if="{{input}}" bindtap="addItemHandle" src="../../image/yes.png"/>
+  </view>
+  <block wx:if="{{ randomselects.length }}">
+    <view class="footer">
+      <!-- <text class="btn" bindtap="toggleAllHandle">✔ 全选</text> -->
+      <image class="btn" bindtap="toggleAllHandle" src="../../image/allselect.png"/>
+      <text class="foottext" wx:if="{{ leftCount }}">剩 {{ leftCount }} {{ leftCount === 1 ? '个' : '个' }}选项</text>
+      <button class="start_btn" bindtap="startHandle" type="primary" disabled="{{ leftCount > 0 ? false : true}}">开始</button>
+      <!-- <image class="btn" wx:if="{{ randomselects.length > leftCount }}" bindtap="clearCompletedHandle" src="../../image/delete.png"/> -->
+      <!-- <text class="btn" wx:if="{{ randomselects.length > leftCount }}" bindtap="clearCompletedHandle">✘ 清除</text> -->
+    </view>
+    <view class="randomselects">
+      <!-- List items should get the class `completed` when marked as completed -->
+      <view class="item{{ item.completed ? ' completed' : '' }}" wx:for="{{ randomselects }}" wx:key="{{ index }}" bindtap="toggleItemHandle" data-index="{{ index }}">
+        <!-- completed: success, randomselect: circle -->
+        <icon class="checkbox" type="{{ item.completed ? 'cancel' : 'success_no_circle' }}"/>
+        <text class="name" style="word-break:break-all;">{{ item.name }}</text>
+        <icon class="remove" type="clear" size="16" catchtap="removeItemHandle" data-index="{{ index }}"/>
+      </view>
+    </view>
+
+  </block>
+  <block wx:else>
+    	<view class="nodata">
+		<image class="nodata_img" src="../../image/nodata.png"></image>
+    <text class="nodata_text">添加选项开始随机选吧！</text>
+  </view>
+  <mp-icon type="field" icon="add" color="black" size="{{25}}"></mp-icon>
+<mp-icon icon="add" color="black" size="{{25}}"></mp-icon>
+  </block>
+
+</view>
+<toast hidden="{{toastHidden}}" bindchange="hideToast">已清除</toast>
+ 

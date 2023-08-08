@@ -1,10 +1,11 @@
 {
   "useExtendedLib": {
-  "weui": true
-},
+    "weui": true
+  },
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
+    "pages/randomselect/randomselect",
     "pages/setting/setting",
     "pages/setting/rank/rank",
     "pages/setting/setmore/setmore",
@@ -14,18 +15,56 @@
     "pages/poster/poster",
     "pages/version/version"
   ],
+  "subpackages": [
+    {
+      "root": "packageA",
+      "pages": [
+        "pages/index/index",
+        "pages/logs/logs"
+      ]
+    },
+    {
+      "root": "packageB",
+      "name": "pack2",
+      "pages": [
+        "pages/randomselect/randomselect"
+      ]
+    },
+    {
+      "root": "packageC",
+      "name": "pack3",
+      "pages": [
+        "pages/setting/setting",
+        "pages/setting/rank/rank",
+        "pages/setting/setmore/setmore"
+      ]
+    },
+    {
+      "root": "packageD",
+      "name": "pack4",
+      "pages": [
+        "pages/about/about",
+        "pages/more/more",
+        "pages/todos/todos",
+        "pages/poster/poster",
+        "pages/version/version"
+      ]
+    }
+  ],
   "navigateToMiniProgramAppIdList": [
     "wxe333b834a643f99d",
     "wx8abaf00ee8c3202e"
-  ],    
-  "requiredBackgroundModes": ["audio","location"],
-
+  ],
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#EDEDED",
     "navigationBarTitleText": "",
     "navigationBarTextStyle": "black"
-   }, 
+  },
   "tabBar": {
     "color": "#cdcdcd",
     "selectedColor": "#000000",
@@ -38,18 +77,23 @@
         "selectedIconPath": "image/yu2.png",
         "text": "专注"
       },
-
       {
         "pagePath": "pages/todos/todos",
         "iconPath": "image/todo2.png",
         "selectedIconPath": "image/todo.png",
         "text": "待办"
-      },      
+      },
       {
         "pagePath": "pages/logs/logs",
         "iconPath": "image/jilu.png",
         "selectedIconPath": "image/jilu2.png",
         "text": "记录"
+      },
+      {
+        "pagePath": "pages/randomselect/randomselect",
+        "iconPath": "image/jilu.png",
+        "selectedIconPath": "image/jilu2.png",
+        "text": "随机选"
       },
       {
         "pagePath": "pages/setting/setting",
