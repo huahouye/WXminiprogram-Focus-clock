@@ -9,7 +9,7 @@
       <!-- <text class="btn" bindtap="toggleAllHandle">✔ 全选</text> -->
       <image class="btn" bindtap="toggleAllHandle" src="../../image/allselect.png"/>
       <text class="foottext" wx:if="{{ leftCount }}">剩 {{ leftCount }} {{ leftCount === 1 ? '个' : '个' }}选项</text>
-      <button class="start_btn" bindtap="startHandle" type="primary" disabled="{{ leftCount > 0 ? false : true}}">开始</button>
+      <button class="start_btn" bindtap="startHandle" type="primary" disabled="{{ leftCount > 0 ? false : true}}">抽取</button>
       <!-- <image class="btn" wx:if="{{ randomselects.length > leftCount }}" bindtap="clearCompletedHandle" src="../../image/delete.png"/> -->
       <!-- <text class="btn" wx:if="{{ randomselects.length > leftCount }}" bindtap="clearCompletedHandle">✘ 清除</text> -->
     </view>

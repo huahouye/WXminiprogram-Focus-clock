@@ -132,28 +132,34 @@ Page({
       ri = this.data.randomselects[rand];
     }
 
+    wx.showLoading({
+      title: '抽取中 ...',
+    });
     var thiz = this;
-    wx.showModal({
-      title: '随机选中了：',
-      content: ri.name,
-      cancelText: "重来",
-      success(res) {
-        if (res.confirm) {
-          console.log('用户点击确定')
-          var logs = thiz.data.chosen_one_logs
-          logs.push({
-            timestamp: new Date(),
-            name: ri.name
-          })
-          thiz.setData({
-            chosen_one_logs: logs
-          })
-          thiz.save()
-        } else if (res.cancel) {
-          console.log('用户点击取消')
+    setTimeout(function () {
+      wx.hideLoading()
+      wx.showModal({
+        title: '随机选中了：',
+        content: ri.name,
+        cancelText: "重来",
+        success(res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+            var logs = thiz.data.chosen_one_logs
+            logs.push({
+              timestamp: new Date(),
+              name: ri.name
+            })
+            thiz.setData({
+              chosen_one_logs: logs
+            })
+            thiz.save()
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
         }
-      }
-    })
+      });
+    }, 2000);
   },
 
   hideToast: function () {

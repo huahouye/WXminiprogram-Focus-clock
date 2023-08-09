@@ -17,21 +17,21 @@
   ],
   "subpackages": [
     {
-      "root": "packageA",
+      "root": "packageIndex",
       "pages": [
         "pages/index/index",
         "pages/logs/logs"
       ]
     },
     {
-      "root": "packageB",
+      "root": "packageRandomselect",
       "name": "pack2",
       "pages": [
         "pages/randomselect/randomselect"
       ]
     },
     {
-      "root": "packageC",
+      "root": "packageSetting",
       "name": "pack3",
       "pages": [
         "pages/setting/setting",
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "root": "packageD",
+      "root": "packageMore",
       "name": "pack4",
       "pages": [
         "pages/about/about",
