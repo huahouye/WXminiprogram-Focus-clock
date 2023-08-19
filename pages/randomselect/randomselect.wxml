@@ -1,7 +1,7 @@
 <view class="randomselect_container">
   <view class="header">
     <!-- <image class="plus" src="../../image/plus.png"/> -->
-    <input class="new-randomselect" value="{{ input }}" placeholder="添加选项"  bindinput="inputChangeHandle"  bindconfirm="addItemHandle" confirm-type="done"/>
+    <input class="new-randomselect" value="{{ input }}" placeholder="添加选项"  bindinput="inputChangeHandle" maxlength="40" bindconfirm="addItemHandle" confirm-type="done"/>
     <image class="plus" wx:if="{{input}}" bindtap="addItemHandle" src="../../image/yes.png"/>
   </view>
   <block wx:if="{{ randomselects.length }}">

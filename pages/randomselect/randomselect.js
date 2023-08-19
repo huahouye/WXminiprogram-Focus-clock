@@ -44,11 +44,23 @@ Page({
   },
 
   addItemHandle: function (e) {
-    if (!this.data.input || !this.data.input.trim()) return
-    var randomselects = this.data.randomselects
-    randomselects.push({ name: this.data.input, completed: false })
+    var inputdata = this.data.input;
+    if (!inputdata || !inputdata.trim()) return;
+    inputdata = inputdata.trim();
+    var randomselects = this.data.randomselects;
+    if (randomselects.find((e) =>{
+     return e.name == inputdata;
+    })) {
+      wx.showToast({
+        title: '选项已经存在',
+        icon: 'success',
+        duration: 2000
+      });
+      return;
+    }
+    randomselects.push({ name: inputdata, completed: false })
     var logs = this.data.randomselect_logs
-    logs.push({ timestamp: new Date(), action: 'Add', name: this.data.input })
+    logs.push({ timestamp: new Date(), action: 'Add', name: inputdata })
     this.setData({
       input: '',
       randomselects: randomselects,
@@ -99,7 +111,7 @@ Page({
           console.log('用户点击取消')
         }
       }
-    })
+    });
 
   },
 
@@ -159,7 +171,7 @@ Page({
           }
         }
       });
-    }, 2000);
+    }, 500);
   },
 
   hideToast: function () {
