@@ -1,35 +1,32 @@
-var util = require('../../utils/util.js')
-var wxCharts = require('../../utils/wxcharts.js')
+var util = require('../../../utils/util.js')
+var wxCharts = require('../../../utils/wxcharts.js')
 var app = getApp()
 var ringChart = null;
 var lognum = 0;
 var worknum = 0;
 var restnum = 0;
-
 Page({
   data: {
-    tabs: [],
-    activeTab: 0,
-    //
-    todo_logs: [],
+    randomselect_logs: [],
     lognum: '',
     modalHidden: true,
     toastHidden: true,
-    //
+
   },
 
-  onLoad() {
-    const titles = ['首页', '外卖']
-    const tabs = titles.map(item => ({ title: item }))
-    this.setData({ tabs })
+  onLoad: function () {
+    var randomselect_logs = wx.getStorageSync('randomselect_logs')
+    if (randomselect_logs) {
+      this.setData({ randomselect_logs: randomselect_logs })
+    }
   },
 
-  onShow() {
-    //
+  onShow: function () {
     wx.setNavigationBarTitle({
-      title: '记录图表'
+      title: '任务记录'
     })
-    var todo_logs = this.getLogs();
+    var randomselect_logs = this.getrandomselect_logs();
+
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -86,24 +83,15 @@ Page({
       ringChart.stopAnimation();
     }, 500);
   },
+  set: function () {
 
-  onTabCLick(e) {
-    const index = e.detail.index
-    this.setData({ activeTab: index })
   },
-
-  onChange(e) {
-    const index = e.detail.index
-    this.setData({ activeTab: index })
-  },
-
-  //////////////
-  getLogs: function () {
-    let todo_logs = wx.getStorageSync('todo_logs')
+  getrandomselect_logs: function () {
+    let randomselect_logs = wx.getStorageSync('randomselect_logs')
     worknum = 0;
     restnum = 0;
     lognum = 0;
-    todo_logs.forEach(
+    randomselect_logs.forEach(
       function (item, index, arry) {
         item.startTime = new Date(item.startTime).toLocaleString()
         lognum++;
@@ -111,12 +99,12 @@ Page({
         if (item.type == 'rest') { restnum++ };
       }
     )
-    console.log(`todo_logs length: ${todo_logs.length} ${worknum} ${restnum} ${lognum}`)
     this.setData({
-      todo_logs: todo_logs
+      randomselect_logs: randomselect_logs
     })
-  },
 
+  },
+  onLoad: function () { },
   switchModal: function () {
     this.setData({
       modalHidden: !this.data.modalHidden
@@ -131,12 +119,12 @@ Page({
     })
   },
   clearLog: function (e) {
-    wx.setStorageSync('logs', [])
+    wx.setStorageSync('randomselect_logs', [])
     this.switchModal()
     this.setData({
       toastHidden: false
     })
-    this.getLogs()
+    this.getrandomselect_logs()
     wx.vibrateShort()
   },
   goposter() {
@@ -166,5 +154,5 @@ Page({
       imageUrl: '/image/about.png'
     }
   }
-  //////////////
+
 })

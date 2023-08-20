@@ -33,6 +33,10 @@ Page({
     if (logs) {
       this.setData({ randomselect_logs: logs })
     }
+    var chosen_one_logs = wx.getStorageSync('chosen_one_logs')
+    if (chosen_one_logs) {
+      this.setData({ chosen_one_logs: chosen_one_logs })
+    }
   },
 
   onLoad: function () {

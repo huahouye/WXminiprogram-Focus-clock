@@ -1,35 +1,24 @@
-var util = require('../../utils/util.js')
-var wxCharts = require('../../utils/wxcharts.js')
+var util = require('../../../utils/util.js')
+var wxCharts = require('../../../utils/wxcharts.js')
 var app = getApp()
 var ringChart = null;
 var lognum = 0;
 var worknum = 0;
 var restnum = 0;
-
 Page({
   data: {
-    tabs: [],
-    activeTab: 0,
-    //
-    todo_logs: [],
+    logs: [],
     lognum: '',
     modalHidden: true,
     toastHidden: true,
-    //
-  },
-
-  onLoad() {
-    const titles = ['首页', '外卖']
-    const tabs = titles.map(item => ({ title: item }))
-    this.setData({ tabs })
   },
 
   onShow() {
-    //
     wx.setNavigationBarTitle({
-      title: '记录图表'
+      title: '任务记录'
     })
-    var todo_logs = this.getLogs();
+    var logs = this.getLogs();
+
     var windowWidth = 320;
     try {
       var res = wx.getSystemInfoSync();
@@ -86,24 +75,13 @@ Page({
       ringChart.stopAnimation();
     }, 500);
   },
-
-  onTabCLick(e) {
-    const index = e.detail.index
-    this.setData({ activeTab: index })
-  },
-
-  onChange(e) {
-    const index = e.detail.index
-    this.setData({ activeTab: index })
-  },
-
-  //////////////
+ 
   getLogs: function () {
-    let todo_logs = wx.getStorageSync('todo_logs')
+    let logs = wx.getStorageSync('logs')
     worknum = 0;
     restnum = 0;
     lognum = 0;
-    todo_logs.forEach(
+    logs.forEach(
       function (item, index, arry) {
         item.startTime = new Date(item.startTime).toLocaleString()
         lognum++;
@@ -111,10 +89,10 @@ Page({
         if (item.type == 'rest') { restnum++ };
       }
     )
-    console.log(`todo_logs length: ${todo_logs.length} ${worknum} ${restnum} ${lognum}`)
     this.setData({
-      todo_logs: todo_logs
+      logs: logs
     })
+
   },
 
   switchModal: function () {
@@ -166,5 +144,5 @@ Page({
       imageUrl: '/image/about.png'
     }
   }
-  //////////////
+
 })
